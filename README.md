@@ -1,2 +1,1 @@
-# Windows_Downloads_Sentinel
-Here is the comprehensive Project Summary and Technical Documentation for Downloads Sentinel.  1. Project Summary Downloads Sentinel is a background automation utility for Windows designed to solve file clutter using Generative AI.
+"Windows_Downloads Sentinel is a background automation utility for Windows designed to solve file clutter using Generative AI. Unlike traditional organizers that rely on rigid rules (e.g., "move all PDFs to Documents"), Sentinel uses Google Gemini 1.5 Flash to semantically analyze the filename and content of incoming files. It determines the context of a file (e.g., distinguishing a "Bank Statement" from a "Pizza Menu") and moves it to the appropriate semantic category (Finance, Personal, Work, etc.) in real-time.
