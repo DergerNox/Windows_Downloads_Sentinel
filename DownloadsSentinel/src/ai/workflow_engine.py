@@ -49,7 +49,9 @@ class WorkflowEngine:
         """Lazy-load Local AI client."""
         if self._local_client is None:
             local_url = self.config.get("ai", {}).get("local_url", "http://localhost:11434/v1/chat/completions")
-            self._local_client = LocalAIHost(local_url)
+            text_model = self.config.get("ai", {}).get("text_model", "qwen2.5:0.5b")
+            vision_model = self.config.get("ai", {}).get("vision_model", "moondream")
+            self._local_client = LocalAIHost(local_url, text_model, vision_model)
         return self._local_client
     
     def route_to_engine(self, filename: str) -> tuple[str, str]:

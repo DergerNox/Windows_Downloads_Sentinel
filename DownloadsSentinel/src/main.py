@@ -13,9 +13,6 @@ import time
 import logging
 import logging.handlers
 
-# Add src to path to allow imports
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
 from core.gaming_detector import GamingDetector
 from core.watcher import FileWatcher
 from core.task_dispatcher import TaskDispatcher
@@ -177,7 +174,8 @@ class SentinelMaster:
 def main():
     """Entry point for script execution."""
     # Required for Windows multiprocessing
-    multiprocessing.freeze_support()
+    if sys.platform == 'win32':
+        multiprocessing.freeze_support()
     
     master = SentinelMaster()
     master.main()
