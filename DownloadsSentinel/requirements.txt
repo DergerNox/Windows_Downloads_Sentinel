@@ -6,7 +6,7 @@ Pillow
 customtkinter
 
 # AI / Cloud
-google-generativeai
+google-genai
 requests
 openai
 

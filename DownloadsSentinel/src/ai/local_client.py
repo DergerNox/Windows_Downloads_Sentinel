@@ -6,6 +6,7 @@ Interfaces with Ollama. Manages model loading/unloading for RAM efficiency.
 import requests
 import logging
 import gc
+import base64
 
 
 class LocalAIHost:
@@ -107,7 +108,6 @@ Category:"""
         Analyze image using Moondream vision model.
         Note: Requires base64 encoding of image for Ollama vision.
         """
-        import base64
         
         try:
             with open(image_path, "rb") as f:

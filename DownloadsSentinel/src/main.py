@@ -61,9 +61,18 @@ class SentinelMaster:
             ]
         )
     
+    def get_base_path(self):
+        """Get the base path for resources. Handles PyInstaller bundled exe."""
+        if getattr(sys, 'frozen', False):
+            # Running as bundled exe - use _MEIPASS for bundled files
+            return sys._MEIPASS
+        else:
+            # Running as script
+            return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    
     def load_config(self):
         """Load configuration files."""
-        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        base_dir = self.get_base_path()
         self.config_path = os.path.join(base_dir, 'config', 'config.json')
         secrets_path = os.path.join(base_dir, 'config', 'secrets.json')
         
@@ -138,7 +147,7 @@ class SentinelMaster:
         
         self.tray = TrayIcon(
             on_quit_callback=self._quit_app,
-            on_settings_callback=self._launch_settings
+            on_settings_callback=self._launch_settings_blocking
         )
         
         # 2. Start Worker Process

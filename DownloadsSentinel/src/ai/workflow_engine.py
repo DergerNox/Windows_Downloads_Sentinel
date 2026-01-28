@@ -33,6 +33,7 @@ class WorkflowEngine:
         
         # AI mode from config
         self.ai_mode = config.get("privacy", {}).get("mode", "CLOUD")  # CLOUD, LOCAL, RULES_ONLY
+        self.ai_enabled = config.get("ai", {}).get("enabled", False)
     
     @property
     def gemini_client(self):
@@ -54,10 +55,13 @@ class WorkflowEngine:
             self._local_client = LocalAIHost(local_url, text_model, vision_model)
         return self._local_client
     
-    def route_to_engine(self, filename: str) -> tuple[str, str]:
+    def route_to_engine(self, file_path: str) -> tuple[str, str]:
         """
         Route file through tiers and return (category, tier_used).
+        file_path: Full path to the file (needed for content analysis)
         """
+        filename = os.path.basename(file_path)
+        
         # Tier 0: Privacy Filter (Highest Priority)
         if self.privacy_filter.is_sensitive(filename):
             return self.privacy_filter.get_secure_destination(), "Tier0_Privacy"
@@ -67,15 +71,17 @@ class WorkflowEngine:
         if category:
             return category, "Tier1_Rules"
         
-        # Tier 2/3: AI (if not RULES_ONLY mode)
-        if self.ai_mode == "RULES_ONLY":
+        # Check if AI is enabled
+        if not self.ai_enabled:
             return "Other", "Tier1_Fallback"
         
-        # Tier 3: AI Classification
+        # Tier 3: AI Classification (only if enabled)
         if self.ai_mode == "CLOUD" and self.gemini_client:
-            category = self.gemini_client.classify(filename)
-            return category, "Tier3_Cloud"
+            # Cloud mode: analyze file CONTENTS for better classification
+            category = self.gemini_client.classify_with_content(file_path)
+            return category, "Tier3_Cloud_Content"
         elif self.ai_mode == "LOCAL" and self.local_client:
+            # Local mode: filename only (for privacy)
             category = self.local_client.classify(filename)
             return category, "Tier3_Local"
         
@@ -88,7 +94,7 @@ class WorkflowEngine:
         Returns True on success.
         """
         filename = os.path.basename(file_path)
-        category, tier = self.route_to_engine(filename)
+        category, tier = self.route_to_engine(file_path)  # Pass full path
         
         self.logger.info(f"[{tier}] {filename} → {category}")
         

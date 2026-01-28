@@ -5,7 +5,7 @@
         "setup_complete": true
     },
     "privacy": {
-        "mode": "CLOUD",
+        "mode": "LOCAL",
         "sensitive_keywords": [
             "bank",
             "tax",
