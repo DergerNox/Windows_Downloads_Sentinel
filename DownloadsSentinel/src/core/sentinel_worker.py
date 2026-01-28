@@ -12,9 +12,6 @@ import logging
 import sys
 import os
 
-# Ensure src is in path for imports
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from ai.workflow_engine import WorkflowEngine
 
 

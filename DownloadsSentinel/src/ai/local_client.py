@@ -14,15 +14,16 @@ class LocalAIHost:
     Responsible for loading models only when needed and unloading after.
     """
     
-    def __init__(self, api_url: str = "http://localhost:11434/v1/chat/completions"):
+    def __init__(self, api_url: str = "http://localhost:11434/v1/chat/completions",
+                 text_model: str = "qwen2.5:0.5b", vision_model: str = "moondream"):
         self.api_url = api_url
         self.logger = logging.getLogger("LocalAIHost")
         self.model_loaded = False
         self.current_model = None
         
         # Model configs
-        self.text_model = "qwen2.5:0.5b"  # Lightweight text classifier
-        self.vision_model = "moondream"   # Vision model for images
+        self.text_model = text_model
+        self.vision_model = vision_model
     
     def load_model(self, model_name: str = None) -> bool:
         """

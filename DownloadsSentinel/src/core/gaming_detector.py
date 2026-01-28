@@ -1,12 +1,23 @@
-import ctypes
-import ctypes.wintypes
 import psutil
 import time
 import logging
+import sys
 
-user32 = ctypes.windll.user32
+# Import Windows-specific libraries only on Windows
+if sys.platform == 'win32':
+    import ctypes
+    import ctypes.wintypes
+    user32 = ctypes.windll.user32
+else:
+    user32 = None
+    ctypes = None
 
 class GamingDetector:
+    """
+    Detects if the user is busy (e.g., gaming or high CPU load).
+    Used to pause file processing during intensive tasks.
+    """
+
     def __init__(self, cpu_threshold=85):
         self.cpu_threshold = cpu_threshold
         self.last_check = 0
@@ -16,13 +27,18 @@ class GamingDetector:
 
     def get_screen_size(self):
         """Returns the resolution of the primary monitor."""
-        return user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+        if user32:
+            return user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+        return 1920, 1080 # Fallback for non-Windows or testing
 
     def is_fullscreen(self):
         """
         Checks if the foreground window is full screen.
         Logic: Foreground window size >= Screen size (with small tolerance for borders).
         """
+        if not user32:
+            return False
+
         try:
             hwnd = user32.GetForegroundWindow()
             rect = ctypes.wintypes.RECT()
