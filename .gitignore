@@ -8,4 +8,4 @@ venv/
 .env
 .DS_Store
 logs/
-config/secrets.json
+DownloadsSentinel/config/secrets.json
