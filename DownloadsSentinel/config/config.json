@@ -1,0 +1,27 @@
+{
+    "general": {
+        "run_at_startup": true,
+        "downloads_path": "F:/Downloads",
+        "setup_complete": true
+    },
+    "privacy": {
+        "mode": "CLOUD",
+        "sensitive_keywords": [
+            "bank",
+            "tax",
+            "cv",
+            "password",
+            "wallet",
+            "invoice"
+        ]
+    },
+    "performance": {
+        "gamer_mode": true,
+        "cpu_threshold": 85,
+        "check_interval": 5
+    },
+    "ai": {
+        "model_name": "gemini-1.5-flash",
+        "local_url": "http://localhost:11434/v1/chat/completions"
+    }
+}

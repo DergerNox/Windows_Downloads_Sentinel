@@ -1,0 +1,72 @@
+2026-01-28 02:06:39,059 [root] Starting Windows Downloads Sentinel...
+2026-01-28 02:06:39,063 [Worker] Started.
+2026-01-28 02:08:23,220 [Dispatcher] User Idle. Queuing: C:\Users\ferin\Downloads\2015_05_22.pdf
+2026-01-28 02:08:23,221 [Worker] Processing: C:\Users\ferin\Downloads\2015_05_22.pdf
+2026-01-28 02:08:23,224 [Router] Error moving file: [WinError 32] The process cannot access the file because it is being used by another process
+2026-01-28 02:09:38,044 [Dispatcher] User Idle. Queuing: C:\Users\ferin\Downloads\book.pdf
+2026-01-28 02:09:38,045 [Worker] Processing: C:\Users\ferin\Downloads\book.pdf
+2026-01-28 02:09:38,046 [Router] Error moving file: [WinError 32] The process cannot access the file because it is being used by another process
+2026-01-28 02:14:05,402 [root] Starting Windows Downloads Sentinel...
+2026-01-28 02:14:05,404 [Worker] Started.
+2026-01-28 02:14:33,183 [Dispatcher] User Idle. Queuing: C:\Users\ferin\Downloads\AI_Ügynökök_és_Promptolás_Részletes_Gyakorlati_Házifeladat.pdf
+2026-01-28 02:14:33,184 [Worker] Processing: C:\Users\ferin\Downloads\AI_Ügynökök_és_Promptolás_Részletes_Gyakorlati_Házifeladat.pdf
+2026-01-28 02:14:33,184 [Dispatcher] User Idle. Queuing: C:\Users\ferin\Downloads\AI_Ügynökök_és_Promptolás_Részletes_Gyakorlati_Házifeladat.pdf
+2026-01-28 02:14:33,184 [Worker] Processing: C:\Users\ferin\Downloads\AI_Ügynökök_és_Promptolás_Részletes_Gyakorlati_Házifeladat.pdf
+2026-01-28 02:14:33,185 [Router] Error moving file: [WinError 32] The process cannot access the file because it is being used by another process
+2026-01-28 02:14:33,185 [Router] File locked: AI_Ügynökök_és_Promptolás_Részletes_Gyakorlati_Házifeladat.pdf. Retrying (1/5)...
+2026-01-28 02:14:34,186 [Router] File locked: AI_Ügynökök_és_Promptolás_Részletes_Gyakorlati_Házifeladat.pdf. Retrying (2/5)...
+2026-01-28 02:14:35,187 [Router] File locked: AI_Ügynökök_és_Promptolás_Részletes_Gyakorlati_Házifeladat.pdf. Retrying (3/5)...
+2026-01-28 02:14:36,189 [Router] File locked: AI_Ügynökök_és_Promptolás_Részletes_Gyakorlati_Házifeladat.pdf. Retrying (4/5)...
+2026-01-28 02:14:37,225 [Router] Moved AI_Ügynökök_és_Promptolás_Részletes_Gyakorlati_Házifeladat.pdf to Documents
+2026-01-28 02:18:15,149 [root] Starting Windows Downloads Sentinel...
+2026-01-28 02:18:15,152 [Worker] Started.
+2026-01-28 02:19:16,732 [root] Starting Windows Downloads Sentinel...
+2026-01-28 02:19:16,735 [Worker] Started.
+2026-01-28 02:22:18,714 [root] Starting Windows Downloads Sentinel...
+2026-01-28 02:22:18,717 [Worker] Started.
+2026-01-28 02:23:30,391 [Dispatcher] User Idle. Queuing: C:\Users\ferin\Downloads\New Text Document.txt
+2026-01-28 02:23:30,391 [Worker] Processing: C:\Users\ferin\Downloads\New Text Document.txt
+2026-01-28 02:23:30,393 [Router] Moved New Text Document.txt to Documents
+2026-01-28 02:24:22,233 [Dispatcher] User Idle. Queuing: C:\Users\ferin\Downloads\y_bitcoin_wallet_password.txt
+2026-01-28 02:24:22,234 [Worker] Processing: C:\Users\ferin\Downloads\y_bitcoin_wallet_password.txt
+2026-01-28 02:24:22,234 [Router] Privacy Airlock Triggered for: y_bitcoin_wallet_password.txt
+2026-01-28 02:24:22,237 [Router] Moved y_bitcoin_wallet_password.txt to Secure_Vault
+2026-01-28 02:26:09,821 [Dispatcher] User Idle. Queuing: C:\Users\ferin\Downloads\Huurrrr.txt
+2026-01-28 02:26:09,821 [Worker] Processing: C:\Users\ferin\Downloads\Huurrrr.txt
+2026-01-28 02:26:09,823 [Router] Moved Huurrrr.txt to Documents
+2026-01-28 02:30:39,042 [Dispatcher] User Idle. Queuing: C:\Users\ferin\Downloads\URRA.txt
+2026-01-28 02:30:39,043 [Worker] Processing: C:\Users\ferin\Downloads\URRA.txt
+2026-01-28 02:30:39,044 [Router] Moved URRA.txt to Documents
+2026-01-28 02:33:31,050 [Dispatcher] User Busy. Buffering: C:\Users\ferin\Downloads\Gaga.txt
+2026-01-28 02:34:55,541 [Dispatcher] Flushing buffer (1 items)...
+2026-01-28 02:34:55,546 [Worker] Processing: C:\Users\ferin\Downloads\Gaga.txt
+2026-01-28 02:34:55,559 [Router] Moved Gaga.txt to Documents
+2026-01-28 02:57:40,599 [root] Starting Windows Downloads Sentinel...
+2026-01-28 02:57:40,600 [root] First run detected. Opening Settings...
+2026-01-28 02:57:45,465 [root] Worker Process Started (PID: 5232)
+2026-01-28 02:57:45,466 [TaskDispatcher] TaskDispatcher started
+2026-01-28 03:12:25,553 [pystray._base] An error occurred when calling message handler
+Traceback (most recent call last):
+  File "C:\Users\ferin\AppData\Roaming\Python\Python313\site-packages\pystray\_win32.py", line 412, in _dispatcher
+    return int(icon._message_handlers.get(
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        uMsg, lambda w, l: 0)(wParam, lParam) or 0)
+        ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ferin\AppData\Roaming\Python\Python313\site-packages\pystray\_win32.py", line 224, in _on_notify
+    descriptors[index - 1](self)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\ferin\AppData\Roaming\Python\Python313\site-packages\pystray\_base.py", line 328, in inner
+    callback(self)
+    ~~~~~~~~^^^^^^
+  File "C:\Users\ferin\AppData\Roaming\Python\Python313\site-packages\pystray\_base.py", line 453, in __call__
+    return self._action(icon, self)
+           ~~~~~~~~~~~~^^^^^^^^^^^^
+  File "D:\Work\Projects\Windows_Downloads_Sentinel\DownloadsSentinel\src\ui\tray.py", line 33, in on_settings
+    self.on_settings_callback()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Work\Projects\Windows_Downloads_Sentinel\DownloadsSentinel\src\main.py", line 57, in launch_settings
+NameError: name '__file__' is not defined. Did you mean: '__name__'?
+2026-01-28 03:14:04,989 [root] Starting Windows Downloads Sentinel...
+2026-01-28 03:14:05,009 [root] Worker Process Started (PID: 9284)
+2026-01-28 03:14:05,011 [TaskDispatcher] TaskDispatcher started
+2026-01-28 03:14:55,270 [TaskDispatcher] User Idle. Dispatching: F:/Downloads\New Text Document.txt

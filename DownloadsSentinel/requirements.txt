@@ -1,0 +1,17 @@
+# Core
+watchdog
+psutil
+pystray
+Pillow
+customtkinter
+
+# AI / Cloud
+google-generativeai
+requests
+openai
+
+# Testing
+pytest
+
+# Build
+pyinstaller
