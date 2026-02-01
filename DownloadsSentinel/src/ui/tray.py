@@ -1,7 +1,6 @@
 import pystray
 from PIL import Image
 import threading
-import sys
 import os
 
 

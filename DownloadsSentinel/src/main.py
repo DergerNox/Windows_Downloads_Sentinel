@@ -7,7 +7,6 @@ Runs on the Main Thread. Critical constraint: Must remain under 15MB RAM and 0.1
 import os
 import json
 import multiprocessing
-import subprocess
 import sys
 import time
 import logging
@@ -101,11 +100,6 @@ class SentinelMaster:
         """Launches the settings window and waits for it to close."""
         from ui.settings import open_settings
         open_settings(self.config_path)
-    
-    def _launch_settings(self):
-        """Launches the settings window as a separate process."""
-        settings_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ui', 'settings.py')
-        subprocess.Popen([sys.executable, settings_script])
     
     def start_worker(self):
         """Start the worker process."""
