@@ -63,6 +63,10 @@ class FileWatcher:
         self.observer.start()
         self.logger.info(f"Watcher started on: {self.path}")
 
+    def process_existing_file(self, file_path):
+        """Manually trigger processing for an existing file (used by Scanner)."""
+        self.handler._process_event(file_path)
+
     def stop(self):
         self.observer.stop()
         self.observer.join()

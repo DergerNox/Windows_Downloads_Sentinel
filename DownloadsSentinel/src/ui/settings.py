@@ -12,7 +12,7 @@ class SettingsWindow(ctk.CTk):
         super().__init__()
         self.config_path = config_path
         self.title("Windows Downloads Sentinel - Settings")
-        self.geometry("500x500")
+        self.geometry("500x700")
         
         # Handle window close button (X)
         self.protocol("WM_DELETE_WINDOW", self.on_close)
@@ -87,11 +87,68 @@ class SettingsWindow(ctk.CTk):
         self.slider_cpu = ctk.CTkSlider(self, from_=50, to=100, command=self.update_cpu_label)
         self.slider_cpu.grid(row=7, column=0, padx=20, pady=10, sticky="ew")
 
+        # Maintenance Frame
+        self.maintenance_frame = ctk.CTkFrame(self)
+        self.maintenance_frame.grid(row=8, column=0, padx=20, pady=10, sticky="ew")
+        
+        ctk.CTkLabel(self.maintenance_frame, text="Maintenance", font=("Arial", 12, "bold")).pack(pady=5)
+        
+        # Scanner Interval
+        self.scan_interval_frame = ctk.CTkFrame(self.maintenance_frame, fg_color="transparent")
+        self.scan_interval_frame.pack(fill="x", padx=10, pady=5)
+        
+        ctk.CTkLabel(self.scan_interval_frame, text="Scan Interval (min):").pack(side="left")
+        self.scan_interval_var = ctk.StringVar(value="60")
+        self.dropdown_interval = ctk.CTkOptionMenu(
+            self.scan_interval_frame,
+            values=["15", "30", "45", "60"],
+            variable=self.scan_interval_var,
+            width=80
+        )
+        self.dropdown_interval.pack(side="right")
+        
+        # Delete All Button
+        self.btn_delete_all = ctk.CTkButton(
+            self.maintenance_frame, 
+            text="Delete All Files", 
+            fg_color="#D32F2F", 
+            hover_color="#B71C1C",
+            command=self.delete_all_files
+        )
+        self.btn_delete_all.pack(pady=10, padx=10, fill="x")
+
         # Save Button
         self.btn_save = ctk.CTkButton(self, text="Save & Close", command=self.save_settings)
         self.btn_save.grid(row=10, column=0, padx=20, pady=20)
 
         self.load_settings()
+
+    def delete_all_files(self):
+        """Logic to delete all files in the downloads folder."""
+        folder = self.folder_path_var.get()
+        if not folder or not os.path.exists(folder):
+            messagebox = self._get_messagebox()
+            messagebox.showerror("Error", "Invalid download folder path.")
+            return
+
+        messagebox = self._get_messagebox()
+        if messagebox.askyesno("Confirm Delete", f"Are you sure you want to DELETE ALL files in:\n{folder}\n\nThis cannot be undone!"):
+            try:
+                count = 0
+                for filename in os.listdir(folder):
+                    file_path = os.path.join(folder, filename)
+                    if os.path.isfile(file_path):
+                        os.unlink(file_path) # Permanent delete
+                        count += 1
+                messagebox.showinfo("Success", f"Deleted {count} files.")
+            except Exception as e:
+                # In a real app we might want to log this too
+                messagebox.showerror("Deletion Error", f"Failed to delete some files.\nError: {str(e)}")
+
+    def _get_messagebox(self):
+        """Lazy load messagebox to avoid top-level import issues."""
+        from tkinter import messagebox
+        return messagebox
     
     def on_ai_enabled_changed(self):
         """Callback when AI enabled checkbox changes."""
@@ -220,6 +277,12 @@ class SettingsWindow(ctk.CTk):
                     dl_path = general.get("downloads_path", "%USERPROFILE%\\Downloads")
                     # Expand environment variables for display
                     self.folder_path_var.set(os.path.expandvars(dl_path))
+                    # Scan Interval (default 60)
+                    scan_interval = str(general.get("scan_interval_minutes", "60"))
+                    if scan_interval not in ["15", "30", "45", "60"]:
+                        scan_interval = "60"
+                    self.scan_interval_var.set(scan_interval)
+                    
                     # AI settings
                     ai_settings = data.get("ai", {})
                     self.ai_enabled_var.set(ai_settings.get("enabled", False))
@@ -261,6 +324,7 @@ class SettingsWindow(ctk.CTk):
         current_config["performance"]["cpu_threshold"] = int(self.slider_cpu.get())
         current_config["general"]["downloads_path"] = self.folder_path_var.get()
         current_config["general"]["run_at_startup"] = self.startup_var.get()
+        current_config["general"]["scan_interval_minutes"] = int(self.scan_interval_var.get())
         current_config["ai"]["enabled"] = self.ai_enabled_var.get()
         current_config["ai"]["cloud_warning_dismissed"] = not self.show_cloud_warning
         
